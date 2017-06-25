@@ -29,3 +29,16 @@ This will create file public/bundle.js which is included in public/index.html
 Now open index.html and you should see:
 
 Hello Webpack!!
+
+## 2. Webpack configuration file
+
+Instead of using Webpack from command line like above it is more useful to create a configuration file and use npm to do it automatically.
+Let's create [`webpack.config.js`](webpack.config.js) in root of the project and add task for npm to execute webpack - update [package.json](package.json) and add:
+```
+ "scripts": {
+ "start": "node_modules/.bin/webpack"
+ },
+```
+
+Now you can run webpack with:
+`npm start`

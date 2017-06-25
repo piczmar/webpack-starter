@@ -63,3 +63,61 @@ Update [`webpack.config.js`](webpack.cofig.js) with `devserver` setting and [`pa
 This will allow to run public content on small node.js express application and automatically refresh page in web browser when files are updated.
 Now when you start application with `npm start` webpack server will run and print default url: `http://localhost:8080/` which you can open in browser.
 
+## 5. Loaders
+Loaders are useful for files transformation, e.g. with Babel loader ES6 version of JS can be transformed to older version ES5 which is supported by current browsers.
+Loaders configuration is added in [`webpack.config.js`](webpack.config.js) and has the following options:
+* test: A regular expression that matches the file extensions that should run through this loader (Required).
+* loader:		The name of the loader (Required).
+* include / exclude: Optional setting to manually set which folders and files the loader should explicitly add or ignore.
+* query: The query setting can be used to pass Additional options to the loader.
+
+### 5.1 Json Loader
+We can install json loader to load text from separate json file:
+`npm install --save json-loader`
+
+Add configuration in [`webpack.config.js`](webpack.config.js):
+```
+    module: {
+        loaders: [
+            {
+                test: /\.json$/,
+                loader: "json-loader"
+            }
+        ]
+    },
+```
+
+### 5.2 Babel Loader
+
+Babel is modular and distributed in different npm modules.
+The core functionality is available in the “babelcore” npm package,
+the integration with webpack is available through the “babel-loader” npm package,
+and for every type of feature and extensions you want to make available to your code,
+you will need to install a separate package (the most common are babel-preset-es2015
+and babel-preset-react, for compiling ES6 and React’s JSX, respectively).
+To install all at once as development dependencies, you can use:
+
+```
+npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+```
+
+Update  [`webpack.config.js`](webpack.config.js)  with Babel loader setup:
+
+```
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }
+```
+
+Now webpack configuration allows to use ES6 modules and syntax, as well as JSX (for React).
+
+
+
+
+## Credits
+This project was created based on ["APPENDIX A"](http://www.pro-react.com/materials/appendixA/) from [Pro-React Book materials](http://www.pro-react.com/materials/)

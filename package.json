@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Minimal project demonstrating Webpack features",
   "scripts": {
-    "start": "node_modules/.bin/webpack"
+    "start": "node_modules/.bin/webpack-dev-server --progress"
   },
   "keywords": [
     "webpack"
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.5.0"
   }
 }

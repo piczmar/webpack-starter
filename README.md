@@ -44,7 +44,7 @@ Now you can run webpack with:
 `npm start`
 
 
-## 3.Source maps
+## 3. Source maps
  A disadvantage of Webpack is that it packs all the source code to a single file where it is hard to distinguish original code durign debugging.
  There is a way to fix it using source maps using `devtool` setting:
  * `source-map` Generate a complete, full featured source map in a separate file. This option has the best quality of source map, but it does slow down the build process.
@@ -53,3 +53,13 @@ Now you can run webpack with:
  * `cheap-module-eval-source-map` The fastest way to generate a source map during build. The generated source map will be inlined with the same bundled JavaScript file, without column-mappings. As in the previous option, there are drawbacks in JavaScript execution time, so this option is not appropriate for generating production-ready bundles.
 
 We will updade [`webpack.config.js`](webpack.config.js) with this setting.
+
+
+## 4. Dev server
+Install dev server:
+`npm install --save-dev webpack-dev-server`
+Update [`webpack.config.js`](webpack.cofig.js) with `devserver` setting and [`package.json`](package.json) start command.
+
+This will allow to run public content on small node.js express application and automatically refresh page in web browser when files are updated.
+Now when you start application with `npm start` webpack server will run and print default url: `http://localhost:8080/` which you can open in browser.
+

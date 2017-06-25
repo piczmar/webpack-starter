@@ -42,3 +42,14 @@ Let's create [`webpack.config.js`](webpack.config.js) in root of the project and
 
 Now you can run webpack with:
 `npm start`
+
+
+## 3.Source maps
+ A disadvantage of Webpack is that it packs all the source code to a single file where it is hard to distinguish original code durign debugging.
+ There is a way to fix it using source maps using `devtool` setting:
+ * `source-map` Generate a complete, full featured source map in a separate file. This option has the best quality of source map, but it does slow down the build process.
+ * `cheap-module-source-map` Generate source map in a separate file without column-mappings. Stripping the column mapping favors a better build performance introducing a minor inconvenient for debugging: The browser developer tools will only be able to point to the line of the original source code, but not to a specific column (or character).
+ * `eval-source-map` Bundles the source code modules using “eval”, with nested, complete source map in the same file. This option does generate a full featured source map without a big impact on build time, but with performance and security drawbacks in the JavaScript execution. While it’s a good option for using during development, this option should never be used in production.
+ * `cheap-module-eval-source-map` The fastest way to generate a source map during build. The generated source map will be inlined with the same bundled JavaScript file, without column-mappings. As in the previous option, there are drawbacks in JavaScript execution time, so this option is not appropriate for generating production-ready bundles.
+
+We will updade [`webpack.config.js`](webpack.config.js) with this setting.

@@ -1,1 +1,3 @@
-node_modulesgit
+.idea/
+node_modules
+public/bundle.js

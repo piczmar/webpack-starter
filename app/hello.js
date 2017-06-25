@@ -1,5 +1,5 @@
-var config = require('./config.json');
-module.exports = function () {
+import config from "./config.json";
+export function hello() {
     var hello = document.createElement('div');
     hello.textContent = config.helloText;
     return hello;

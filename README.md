@@ -117,8 +117,8 @@ Update  [`webpack.config.js`](webpack.config.js)  with Babel loader setup:
 Now webpack configuration allows to use ES6 modules and syntax, as well as JSX (for React).
 We can refactor JS code to use ES6 syntax.
 
-
-
+Babel configuration can grow when the project grows and keeping it with webpack config may become cumbersome.
+It is possible ot externalize it to [`.babelrc`](.babelrc)
 
 ## Credits
 This project was created based on ["APPENDIX A"](http://www.pro-react.com/materials/appendixA/) from [Pro-React Book materials](http://www.pro-react.com/materials/)

@@ -1,0 +1,13 @@
+{
+  "name": "webpack-starter",
+  "version": "1.0.0",
+  "description": "Minimal project demonstrating Webpack features",
+  "keywords": [
+    "webpack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^2.2.0"
+  }
+}

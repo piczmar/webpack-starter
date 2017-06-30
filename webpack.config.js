@@ -11,19 +11,21 @@ module.exports = {
         filename: "bundle.js"
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.json$/,
-                loader: "json-loader"
+                use: ["json-loader"]
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                use: ['babel-loader']
             },
             {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader?modules'
+                use: [
+                    'style-loader', 'css-loader?modules'
+                ]
             }
         ]
     },

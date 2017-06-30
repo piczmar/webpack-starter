@@ -120,5 +120,29 @@ We can refactor JS code to use ES6 syntax.
 Babel configuration can grow when the project grows and keeping it with webpack config may become cumbersome.
 It is possible ot externalize it to [`.babelrc`](.babelrc)
 
+## 5.3 Stylesheet loaders
+
+* `css-loader` looks for `@import` and `url` statements to resolve them, it also supports [CSS modules](https://github.com/css-modules/css-modules) : _CSS files in which all class names and animation names are scoped locally by default._
+* `style-loader` adds computed style rules to the page
+
+Install:
+```
+npm install --save-dev style-loader css-loader
+```
+
+Then update  [`webpack.config.js`](webpack.config.js)  with Babel loader setup:
+
+```
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader?modules'
+            }
+```
+
+`!` is used to chain multiple loaders for the same `test` definition
+
+Next, create [main.css](app/main.css) and import it in our entry point [main.js](app/main.js).
+Then create [hello.css](app/hello.css) and import it in [hello.css](app/hello.js).
+
 ## Credits
 This project was created based on ["APPENDIX A"](http://www.pro-react.com/materials/appendixA/) from [Pro-React Book materials](http://www.pro-react.com/materials/)

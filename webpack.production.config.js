@@ -38,6 +38,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: __dirname + "/app/index.tmpl.html"
         }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin("style.css")
     ],
 }

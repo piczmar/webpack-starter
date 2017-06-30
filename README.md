@@ -41,7 +41,7 @@ Let's create [`webpack.config.js`](webpack.config.js) in root of the project and
 ```
 
 Now you can run webpack with:
-`npm start`
+`npm run start`
 
 
 ## 3. Source maps
@@ -61,7 +61,7 @@ Install dev server:
 Update [`webpack.config.js`](webpack.cofig.js) with `devserver` setting and [`package.json`](package.json) start command.
 
 This will allow to run public content on small node.js express application and automatically refresh page in web browser when files are updated.
-Now when you start application with `npm start` webpack server will run and print default url: `http://localhost:8080/` which you can open in browser.
+Now when you start application with `npm run start` webpack server will run and print default url: `http://localhost:8080/` which you can open in browser.
 
 ## 5. Loaders
 Loaders are useful for files transformation, e.g. with Babel loader ES6 version of JS can be transformed to older version ES5 which is supported by current browsers.
@@ -143,6 +143,102 @@ Then update  [`webpack.config.js`](webpack.config.js)  with Babel loader setup:
 
 Next, create [main.css](app/main.css) and import it in our entry point [main.js](app/main.js).
 Then create [hello.css](app/hello.css) and import it in [hello.css](app/hello.js).
+
+# 6 Plugins
+Webpack has a wide range of plugins developed by the community to serve different purposes.
+Here are some useful examples.
+
+## 6.1 BannerPlugin
+Allows to add a banner to generated files, e.g. for copyright notice
+
+
+Update  [`webpack.config.js`](webpack.config.js) with:
+```
+    plugins: [
+        new webpack.BannerPlugin("Copyright ...")
+    ],
+```
+
+## 6.2 HtmlWebpackPlugin
+Allows to generate final HTML page with all webpack bundles included.
+Install it with:
+```
+npm install --save-dev html-webpack-plugin
+```
+Then remove the `public` folder and create a [template HTML](app/index.tmpl.html) file used when generating final page.
+
+Update  [`webpack.config.js`](webpack.config.js) with:
+```
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+    ...
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle.js"
+    },
+    ...
+    plugins: [
+        ...
+        new HtmlWebpackPlugin({
+            template: __dirname + "/app/index.tmpl.html"
+        })
+    ],
+}
+```
+
+In development all the files will be generated in memory so the `build` folder will not be generated.
+To generate it we need to provide separate configuration in [webpack.production.config.js](webpack.production.config.js)
+and add command in [package.json](package.json)
+
+```
+...
+  "scripts": {
+    ...
+    "build": "NODE_ENV=production node_modules/.bin/webpack –config ./webpack.production.config.js --progress"
+  },
+...
+```
+
+Then you can run it with:
+```
+npm run build
+```
+
+## 6.3 OccurenceOrderPlugin
+Webpack gives IDs to identify your modules.
+With this plugin, Webpack will analyze and prioritize often used modules assigning them the smallest ids.
+
+## 6.4 UglifyJsPlugin
+UglifyJS is a JavaScript compressor/minifier
+
+## 6.3 ExtractTextPlugin
+It moves every CSS requires/imports in JS files into separate CSS output files
+Install with
+```
+npm install --save-dev extract-text-webpack-plugin
+```
+
+Update  [`webpack.config.js`](webpack.config.js) with:
+```
+...
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+module.exports = {
+    ...
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle.js"
+    },
+    ...
+    plugins: [
+        ...
+        new HtmlWebpackPlugin({
+            template: __dirname + "/app/index.tmpl.html"
+        })
+    ],
+}
+```
+
 
 ## Credits
 This project was created based on ["APPENDIX A"](http://www.pro-react.com/materials/appendixA/) from [Pro-React Book materials](http://www.pro-react.com/materials/)
